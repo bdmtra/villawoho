@@ -420,10 +420,6 @@ class BookingController extends \App\Http\Controllers\Controller
             return $this->sendError(__('Service is not bookable'));
         }
 
-        if(Auth::id() == $service->create_user){
-            return $this->sendError(__('You cannot book your own service'));
-        }
-
         return $service->addToCart($request);
     }
 

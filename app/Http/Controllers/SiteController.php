@@ -31,8 +31,12 @@ class SiteController extends Controller
 
     public function checkDefaultHotelAvailability(){
         $request = request()->all();
-        $request['start_date'] = \DateTime::createFromFormat('!m/d/Y', $request['start_date'])->format('Y-m-d');
-        $request['end_date'] = \DateTime::createFromFormat('!m/d/Y', $request['end_date'])->format('Y-m-d');
+        if($request['start_date']) {
+            $request['start_date'] = \DateTime::createFromFormat('!m/d/Y', $request['start_date'])->format('Y-m-d');
+        }
+        if($request['end_date']) {
+            $request['end_date'] = \DateTime::createFromFormat('!m/d/Y', $request['end_date'])->format('Y-m-d');
+        }
         $rules = [
             'start_date' => 'required:date_format:Y-m-d',
             'end_date'   => 'required:date_format:Y-m-d',
