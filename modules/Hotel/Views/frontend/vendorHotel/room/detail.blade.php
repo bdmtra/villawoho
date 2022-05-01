@@ -19,30 +19,13 @@
         <form novalidate action="{{route('hotel.vendor.room.store',['hotel_id'=>$hotel->id,'id'=>($row->id) ? $row->id : '-1','lang'=>request()->query('lang')])}}" class="needs-validation" method="post">
             @csrf
             <div class="form-add-service">
-                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <a data-toggle="tab" href="#nav-tour-content" aria-selected="true" class="active">{{__("1. Room Content")}}</a>
-                    @if(is_default_lang())
-                        <a data-toggle="tab" href="#nav-tour-pricing" aria-selected="false">{{__("2. Pricing")}}</a>
-                        <a data-toggle="tab" href="#nav-attribute" aria-selected="false">{{__("3. Attributes")}}</a>
-                        <a data-toggle="tab" href="#nav-ical" aria-selected="false">{{__("4. Ical")}}</a>
-
-                    @endif
-                </div>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-tour-content">
                         @include('Hotel::admin.room.form-detail.content')
-                    </div>
-                    @if(is_default_lang())
-                        <div class="tab-pane fade" id="nav-tour-pricing">
+                        @if(is_default_lang())
                             @include('Hotel::admin.room.form-detail.pricing')
-                        </div>
-                        <div class="tab-pane fade" id="nav-attribute">
-                            @include('Hotel::admin.room.form-detail.attributes')
-                        </div>
-                        <div class="tab-pane fade" id="nav-ical">
-                            @include('Hotel::admin.room.form-detail.ical')
-                        </div>
-                    @endif
+                        @endif
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-between">

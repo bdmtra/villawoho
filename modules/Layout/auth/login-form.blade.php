@@ -16,7 +16,6 @@
             <label for="remember-me" class="mb0">
                 <input type="checkbox" name="remember" id="remember-me" value="1"> {{__('Remember me')}} <span class="checkmark fcheckbox"></span>
             </label>
-            <a href="{{ route("password.request") }}">{{__('Forgot Password?')}}</a>
         </div>
     </div>
     @if(setting_item("user_enable_login_recaptcha"))
@@ -62,6 +61,4 @@
             </div>
         </div>
     @endif
-    <div class="c-grey font-medium f14 text-center"> {{__('Do not have an account?')}} <a href="" data-target="#register" data-toggle="modal">{{__('Sign Up')}}</a>
-    </div>
 </form>

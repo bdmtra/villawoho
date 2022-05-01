@@ -1,20 +1,10 @@
 <tr>
-    <td class="booking-history-type">
-        @if($service = $booking->service)
-            <i class="{{$service->getServiceIconFeatured()}}"></i>
-        @endif
-        <small>{{$booking->object_model}}</small>
-    </td>
-    <td>
-        @if($service = $booking->service)
-            @php
-                $translation = $service->translateOrOrigin(app()->getLocale());
-            @endphp
-            <a target="_blank" href="{{$service->getDetailUrl()}}">
-                {!! clean($translation->title) !!}
-            </a>
-        @else
-            {{__("[Deleted]")}}
+    <td class="a-hidden">
+        @php $rooms = \Modules\Hotel\Models\HotelRoomBooking::getByBookingId($booking->id) @endphp
+        @if(!empty($rooms))
+            @foreach($rooms as $room)
+                {{$room->room->title}}
+            @endforeach
         @endif
     </td>
     <td class="a-hidden">{{display_date($booking->created_at)}}</td>
@@ -30,8 +20,6 @@
         @endif
     </td>
     <td>{{format_money_main($booking->total)}}</td>
-    <td>{{format_money($booking->paid)}}</td>
-    <td>{{format_money($booking->total - $booking->paid)}}</td>
     <td class="{{$booking->status}} a-hidden">{{$booking->statusName}}</td>
     <td width="2%">
         @if($service = $booking->service)
@@ -40,12 +28,9 @@
             </a>
             @include ($service->checkout_booking_detail_modal_file ?? '')
         @endif
-        <a href="{{route('user.booking.invoice',['code'=>$booking->code])}}" class="btn btn-xs btn-primary btn-info-booking open-new-window mt-1" onclick="window.open(this.href); return false;">
-            <i class="fa fa-print"></i>{{__("Invoice")}}
-        </a>
-        @if($booking->status == 'unpaid')
-            <a href="{{route('booking.checkout',['code'=>$booking->code])}}" class="btn btn-xs btn-primary btn-info-booking open-new-window mt-1">
-                {{__("Pay now")}}
+        @if($booking->status == 'processing')
+            <a href="{{route('booking.markPaid',['id'=>$booking->id])}}" class="btn btn-xs btn-primary btn-info-booking open-new-window mt-1">
+                {{__("Mark as paid")}}
             </a>
         @endif
     </td>

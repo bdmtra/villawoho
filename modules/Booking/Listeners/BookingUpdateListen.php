@@ -11,7 +11,7 @@
         public function handle(BookingUpdatedEvent $event)
         {
             $booking = $event->booking;
-            $booking->sendStatusUpdatedEmails();
+            //$booking->sendStatusUpdatedEmails();
 
             //case guest checkout
             if(!Auth::id()){
@@ -30,7 +30,7 @@
                 'avatar'  => $avatar,
                 'link' => route('report.admin.booking'),
                 'type' => $booking->object_model,
-                'message' => __(':name has changed to :status', ['name' => $booking->service->title, 'status' => $booking->status])
+                'message' => __(':name has changed to :status', ['status' => $booking->status])
             ];
 
             // notify vendor

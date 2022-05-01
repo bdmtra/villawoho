@@ -137,14 +137,7 @@
         {!! setting_item_with_lang_raw('body_scripts') !!}
     @endif
     <div class="bravo_wrap">
-        @if(!is_api())
-            @include('Layout::parts.topbar')
-            @include('Layout::parts.header')
-        @endif
-
         @yield('content')
-
-        @include('Layout::parts.footer')
     </div>
     @if(!is_demo_mode())
         {!! setting_item('footer_scripts') !!}

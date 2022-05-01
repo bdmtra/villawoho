@@ -32,6 +32,7 @@ Route::group(['prefix'=>'user/'.config('hotel.hotel_route_prefix'),'middleware' 
 });
 
 Route::group(['prefix'=>'user/'.config('hotel.hotel_route_prefix')],function(){
+    Route::get('/default/room','AvailabilityController@defaultRoom')->name('hotel.vendor.room.availability.defaultRoom');
     Route::group(['prefix'=>'{hotel_id}/availability'],function(){
         Route::get('/','AvailabilityController@index')->name('hotel.vendor.room.availability.index');
         Route::get('/loadDates','AvailabilityController@loadDates')->name('hotel.vendor.room.availability.loadDates');

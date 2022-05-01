@@ -42,7 +42,7 @@ class Booking extends BaseModel
     ];
 
     public static $notAcceptedStatus = [
-        'draft','cancelled','unpaid'
+        'draft','cancelled','unpaid', 'processing'
     ];
 
     public function getGatewayObjAttribute()

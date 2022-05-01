@@ -593,4 +593,11 @@ class BookingController extends \App\Http\Controllers\Controller
             'message' => __("You booking has been changed successfully")
         ]);
     }
+
+    public function markPaid(Request $request, $id){
+        $booking = Booking::find($id);
+        $booking->paid = $booking->total;
+        $booking->markAsPaid();
+        return redirect()->route('user.booking_history');
+    }
 }

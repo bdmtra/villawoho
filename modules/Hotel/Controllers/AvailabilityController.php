@@ -274,4 +274,9 @@ class AvailabilityController extends FrontendController{
         return $this->sendSuccess([],__("Update Success"));
 
     }
+
+    public function defaultRoom() {
+        $hotel = Hotel::where('create_user', Auth::id())->first();
+        return redirect()->route('hotel.vendor.room.index', ['hotel_id' => $hotel->id]);
+    }
 }

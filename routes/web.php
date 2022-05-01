@@ -11,17 +11,23 @@ use Illuminate\Support\Facades\Route;
     | contains the "web" middleware group. Now create something great!
     |
     */
-Route::get('/intro','LandingpageController@index');
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/install/check-db', 'HomeController@checkConnectDatabase');
 
-// Social Login
-Route::get('social-login/{provider}', 'Auth\LoginController@socialLogin');
-Route::get('social-callback/{provider}', 'Auth\LoginController@socialCallBack');
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
+Route::get('/rooms', function () {
+    return view('rooms');
+})->name('rooms');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::get('/availability', 'SiteController@checkDefaultHotelAvailability')->name('checkDefaultHotelAvailability');
+Route::get('/calendar','CalendarController@index')->name('calendar');
+Route::get('/calendar/loadDates','CalendarController@loadDates')->name('calendar.loadDates');
+Route::post('/calendar/store','CalendarController@store')->name('calendar.store');
 
 // Logs
 Route::get(config('admin.admin_route_prefix').'/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware(['auth', 'dashboard','system_log_view'])->name('admin.logs');
-
-Route::get('/install','InstallerController@redirectToRequirement')->name('LaravelInstaller::welcome');
-Route::get('/install/environment','InstallerController@redirectToWizard')->name('LaravelInstaller::environment');

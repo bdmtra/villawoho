@@ -1,20 +1,26 @@
 <?php
 $dataUser = Auth::user();
 $menus = [
-    'dashboard'       => [
+/*    'dashboard'       => [
         'url'        => route("vendor.dashboard"),
         'title'      => __("Dashboard"),
         'icon'       => 'fa fa-home',
         'permission' => 'dashboard_vendor_access',
         'position'   => 10
-    ],
+    ],*/
     'booking-history' => [
         'url'      => route("user.booking_history"),
         'title'    => __("Booking History"),
         'icon'     => 'fa fa-clock-o',
         'position' => 20
     ],
-    "wishlist"=>[
+    'rooms' => [
+        'url'      => route("hotel.vendor.room.availability.defaultRoom"),
+        'title'    => __("Rooms"),
+        'icon'     => 'fa fa-list',
+        'position' => 20
+    ],
+/*    "wishlist"=>[
         'url'   => route("user.wishList.index"),
         'title' => __("Wishlist"),
         'icon'  => 'fa fa-heart-o',
@@ -38,11 +44,11 @@ $menus = [
         'icon'       => 'icon ion-ios-ribbon',
         'permission' => 'dashboard_access',
         'position'   => 60
-    ]
+    ]*/
 ];
 
 // Modules
-$custom_modules = \Modules\ServiceProvider::getModules();
+/*$custom_modules = \Modules\ServiceProvider::getModules();
 if(!empty($custom_modules)){
     foreach($custom_modules as $module){
         $moduleClass = "\\Modules\\".ucfirst($module)."\\ModuleProvider";
@@ -66,7 +72,7 @@ if(!empty($custom_modules)){
             }
         }
     }
-}
+}*/
 
 // Plugins Menu
 $plugins_modules = \Plugins\ServiceProvider::getModules();
@@ -146,26 +152,6 @@ if (!empty($menus))
     }
 ?>
 <div class="sidebar-user">
-    <div class="bravo-close-menu-user"><i class="icofont-scroll-left"></i></div>
-    <div class="logo">
-        @if($avatar_url = $dataUser->getAvatarUrl())
-            <div class="avatar avatar-cover" style="background-image: url('{{$dataUser->getAvatarUrl()}}')"></div>
-        @else
-            <span class="avatar-text">{{ucfirst($dataUser->getDisplayName()[0])}}</span>
-        @endif
-    </div>
-    <div class="user-profile-avatar">
-        <div class="info-new">
-            <span class="role-name badge badge-info">{{$dataUser->role_name}}</span>
-            <h5>{{$dataUser->getDisplayName()}}</h5>
-            <p>{{ __("Member Since :time",["time"=> date("M Y",strtotime($dataUser->created_at))]) }}</p>
-        </div>
-    </div>
-    <div class="user-profile-plan">
-        @if( !Auth::user()->hasPermissionTo("dashboard_vendor_access") and setting_item('vendor_enable'))
-            <a href=" {{ route("user.upgrade_vendor") }}">{{ __("Become a vendor") }}</a>
-        @endif
-    </div>
     <div class="sidebar-menu">
         <ul class="main-menu">
             @foreach($menus as $menuItem)
