@@ -33,5 +33,8 @@
                 {{__("Mark as paid")}}
             </a>
         @endif
+        <a href="{{route('booking.delete',['id'=>$booking->id])}}" class="btn btn-xs btn-danger btn-info-booking mt-1">
+            {{__("Delete")}}
+        </a>
     </td>
 </tr>

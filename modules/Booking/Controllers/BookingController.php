@@ -596,4 +596,10 @@ class BookingController extends \App\Http\Controllers\Controller
         $booking->markAsPaid();
         return redirect()->route('user.booking_history');
     }
+
+    public function delete(Request $request, $id){
+        $booking = Booking::find($id);
+        $booking->delete();
+        return redirect()->route('user.booking_history');
+    }
 }

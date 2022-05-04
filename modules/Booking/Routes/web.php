@@ -16,6 +16,7 @@ Route::group(['prefix'=>config('booking.booking_route_prefix')],function(){
     Route::post('/addEnquiry','BookingController@addEnquiry');
     Route::post('/setPaidAmount','BookingController@setPaidAmount');
     Route::get('/{id}/markPaid','BookingController@markPaid')->name('booking.markPaid');
+    Route::get('/{id}/delete','BookingController@delete')->name('booking.delete');
 });
 
 

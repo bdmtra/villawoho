@@ -31,6 +31,11 @@
                             </div>
                         </div>
                     </div>
+                    @isset($rooms)
+                        @if(!empty($rooms))
+                            <p class="font-italic">* price is calculated for high season and discount for mid and low season is applied later</p>
+                        @endif
+                    @endisset
                 </form>
             </div>
         </div>
